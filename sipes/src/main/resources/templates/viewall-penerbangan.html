@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns="http://thymeleaf.org">
+<head>
+    <title>View All Pesawat</title>
+    <object th:include = "fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include = "fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <object th:replace = "fragments/fragment :: navbar"></object>
+    <div class="container-fluid">
+    <h3>Informasi Semua Penerbangan</h3>
+<section>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Penerbangan</th>
+                <th>Bandara Asal</th>
+                <th>Bandara Tujuan</th>
+                <th>Waktu Berangkat</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "penerbangan, iterationStatus : ${listPenerbangan}">
+                <td th:text = "${iterationStatus.count}"></td>
+                <td th:text= "${penerbangan.kodePenerbangan}"></td>
+                <td th:text = "${penerbangan.kodeAsal}"></td>
+                <td th:text = "${penerbangan.kodeTujuan}"></td>
+                <td th:text = "${penerbangan.waktuTerbang}"></td>
+                <td>
+                    <form th:action="@{/penerbangan/hapus/} + ${penerbangan.idPenerbangan}" th:object = "${penerbangan}" method = "POST">
+                    <a th:href = "@{/penerbangan/} + ${penerbangan.idPenerbangan}" class = "btn btn-success">Lihat Penerbangan</a>
+                    <a th:href = "@{/penerbangan/ubah/} + ${penerbangan.idPenerbangan}" class="btn btn-primary">Ubah Penerbangan</a>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    </div>
+</body>
+</html>

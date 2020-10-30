@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns="http://thymeleaf.org">
+<head>
+    <title>Form Tambah Pesawat</title>
+    <object th:include = "fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include = "fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <object th:replace = "fragments/fragment :: navbar"></object>
+    <div class="container-fluid">
+        <h3>Tambah Pesawat</h3>
+        <form th:action="@{/pesawat/ubah}" th:object = "${pesawat}" method = "POST">
+            <input type="hidden" th:field="*{idPesawat}"/>
+            Nama Maskapai:<br>
+            <input type="text" class="form-control" name="maskapai" th:value = "*{maskapai}" />
+            <br><br>
+            Tanggal dibuat:<br>
+            <input type="date" class="form-control"  name="tanggal" th:value = "*{tanggal}"/>
+            <br><br>
+            Tempat dibuat:<br>
+            <input type="text" class="form-control" name="tempatDibuat" th:value = "*{tempatDibuat}" />
+            <br><br>
+            Jenis:<br>
+            <select class="form-control" name = "jenis">
+                <option value="Komersial" th:selected="*{jenis == 'Komersial'}">Komersial</option>
+                <option value = "Militer" th:selected="*{jenis == 'Militer'}">Militer</option>
+            </select>
+            <br><br>
+            Tipe:<br>
+            <select class="form-control" name = "tipeModel">
+                <option value="0">Pilih tipe</option>
+                <option th:each="tipe : ${tipes}" th:value="${tipe.idTipe}" th:text="${tipe.namaTipe}"></option>
+            </select>
+            <button type="submit" name="save" class="btn btn-block btn-success">Simpan</button>
+        </form>

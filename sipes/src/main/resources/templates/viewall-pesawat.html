@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang ="en" xmlns="http://thymeleaf.org">
+<head>
+    <title>View All Pesawat</title>
+    <object th:include = "fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include = "fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <object th:replace = "fragments/fragment :: navbar"></object>
+    <div class="container-fluid">
+    <h3>Informasi Semua Pesawat</h3>
+<section>
+    <table class = "table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Seri</th>
+                <th>Tipe</th>
+                <th>Jenis Pesawat</th>
+                <th>Maskapai</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "pesawat, iterationStatus : ${listPesawat}">
+                <td th:text = "${iterationStatus.count}"></td>
+                <td th:text= "${pesawat.nomorSeri}"></td>
+                <td th:text = "${pesawat.tipeModel.namaTipe}"></td>
+                <td th:text = "${pesawat.jenis}"></td>
+                <td th:text = "${pesawat.maskapai}"></td>
+                <td>
+                    <a th:href = "@{/pesawat/} + ${pesawat.idPesawat}" class = "btn btn-success">Lihat Pesawat</a>
+                    <a th:href = "@{/pesawat/ubah/} + ${pesawat.idPesawat}" class="btn btn-danger">Ubah Pesawat</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    </div>
+</body>
+</html>
